@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrapbook Collage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            /* Faint global background grid to match the desk/paper under everything */
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            font-family: 'Caveat', cursive;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* The grid pattern used on the paper scraps */
+        .paper {
+            position: absolute;
+            background-color: #fcfcfc;
+            background-image: 
+                linear-gradient(#9ac0cd 1px, transparent 1px),
+                linear-gradient(90deg, #9ac0cd 1px, transparent 1px);
+            background-size: 20px 20px;
+            box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: grab;
+            color: #1b386b; /* Blue ink color */
+            font-size: 22px;
+            line-height: 1.2;
+            padding: 15px;
+            /* Variables for dragging and rotation */
+            --tx: 0px;
+            --ty: 0px;
+            --rot: 0deg;
+            transform: translate(var(--tx), var(--ty)) rotate(var(--rot));
+            transition: box-shadow 0.2s;
+        }
+
+        .paper:active {
+            cursor: grabbing;
+            box-shadow: 6px 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Polaroid image styles */
+        .polaroid {
+            background: white;
+            padding: 8px 8px 30px 8px;
+            box-shadow: inset 0px 0px 3px rgba(0,0,0,0.1), 1px 2px 5px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+
+        /* Specific Paper Elements */
+
+        /* Left vertical strip */
+        #paper1 {
+            top: 15%;
+            left: 5%;
+            width: 200px;
+            --rot: -4deg;
+        }
+
+        /* Top middle photo */
+        #paper2 {
+            top: 40%;
+            left: 45%;
+            width: 220px;
+            --rot: 8deg;
+        }
+
+        /* Right vertical strip */
+        #paper3 {
+            top: 5%;
+            left: 55%;
+            width: 210px;
+            --rot: -5deg;
+        }
+
+        /* Bottom right horizontal strip */
+        #paper5 {
+            top: 75%;
+            left: 13%;
+            width: 320px;
+            --rot: 5deg;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        /* Circular heart piece */
+        #paper4 {
+            top: 50%;
+            left: 10%;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            --rot: 0deg;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Drawn Heart SVG */
+        .heart-svg {
+            width: 80px;
+            height: 80px;
+            fill: #e63946;
+            stroke: #222;
+            stroke-width: 4px;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-top: 10px;
+        }
+
+        /* Yellow 'sh!!' text */
+        .yellow-text {
+            position: absolute;
+            top: 65%;
+            left: -1%;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 100px;
+            color: #fffb00;
+            -webkit-text-stroke: 3px #ff007f;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            transform: rotate(-12deg);
+            z-index: 100;
+            pointer-events: none; /* Let clicks pass through to papers below */
+        }
+
+        /* Fix for inline emoji alignment */
+        .emoji {
+            font-style: normal;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas">
+        
+        <div class="paper" id="paper1">
+            <div>... and I fallen in <br><br> Love with You <span class="emoji">😍</span></div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&h=300&fit=crop" alt="Sample 1">
+            </div>
+        </div>
+
+        <div class="paper" id="paper2">
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop" alt="Sample 2">
+            </div>
+        </div>
+
+        <div class="paper" id="paper3">
+            <div>How can be <br><br> someone so cute <span class="emoji">❤️</span></div>
+            <div class="polaroid">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" alt="Sample 3">
+            </div>
+        </div>
+
+        <div class="paper" id="paper4">
+            <svg class="heart-svg" viewBox="0 0 32 29.6">
+                <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+                c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+            </svg>
+        </div>
+
+        <div class="paper" id="paper5">
+            Drag the papers!!
+        </div>
+
+        <div class="yellow-text">
+            sh!!
+        </div>
+
+    </div>
+
+    <script>
+        // Drag and Drop Logic
+        const papers = document.querySelectorAll('.paper');
+        let activePaper = null;
+        let initialX;
+        let initialY;
+        let zIndexCounter = 10; // To ensure dragged paper comes to the front
+
+        papers.forEach(paper => {
+            // Initialize translation values
+            paper.dataset.tx = 0;
+            paper.dataset.ty = 0;
+
+            paper.addEventListener('mousedown', dragStart);
+            paper.addEventListener('touchstart', dragStart, {passive: false});
+        });
+
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('touchmove', drag, {passive: false});
+
+        document.addEventListener('mouseup', dragEnd);
+        document.addEventListener('touchend', dragEnd);
+
+        function dragStart(e) {
+            activePaper = e.target.closest('.paper');
+            
+            if (activePaper) {
+                // Bring to front
+                activePaper.style.zIndex = zIndexCounter++;
+
+                const tx = parseFloat(activePaper.dataset.tx);
+                const ty = parseFloat(activePaper.dataset.ty);
+
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - tx;
+                    initialY = e.touches[0].clientY - ty;
+                } else {
+                    initialX = e.clientX - tx;
+                    initialY = e.clientY - ty;
+                }
+            }
+        }
+
+        function drag(e) {
+            if (activePaper) {
+                e.preventDefault(); // Prevents scrolling on touch devices
+            
+                let currentX, currentY;
+
+                if (e.type === "touchmove") {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+
+                // Update data attributes
+                activePaper.dataset.tx = currentX;
+                activePaper.dataset.ty = currentY;
+
+                // Update CSS variables for smooth translation without overwriting rotation
+                activePaper.style.setProperty('--tx', `${currentX}px`);
+                activePaper.style.setProperty('--ty', `${currentY}px`);
+            }
+        }
+
+        function dragEnd() {
+            activePaper = null;
+        }
+    </script>
+
+</body>
+</html>
