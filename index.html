@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Story ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+background:#0f0f0f;
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+top:0;
+left:0;
+display:none;
+padding-top:12vh;
+animation:fade 1s;
+}
+
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+h1{color:#ff4d6d}
+
+button{
+padding:12px 22px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:30px;
+margin-top:20px;
+cursor:pointer;
+}
+
+img{
+width:220px;
+border-radius:20px;
+margin:10px;
+box-shadow:0 0 20px #ff4d6d55;
+}
+
+.heart{
+position:fixed;
+color:#ff4d6d;
+animation:fall linear infinite;
+}
+@keyframes fall{0%{top:-10%}100%{top:110%}}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="p1" style="display:block">
+<h1>Hey (USKA NAAM) ❤️</h1>
+<p>Ye website meri sab feelings ka chota sa ghar hai… sirf tumhare liye 😌</p>
+<button onclick="next('p2')">Start our journey</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<h1>Our Memories 📸</h1>
+<img src="photo1.jpg">
+<img src="photo2.jpg">
+<p>Har photo ek feeling hai… jo kabhi fade nahi hogi.</p>
+<button onclick="next('p3')">Next</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<h1>Why I Love You 💞</h1>
+<p>
+Tum meri peace ho<br>
+Tum meri best friend ho<br>
+Tumhari smile meri favourite therapy hai
+</p>
+<button onclick="next('p4')">Next</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+<h1>Little Love Letter 💌</h1>
+<p>
+Mujhe perfect relationship nahi chahiye…  
+bas tum chahiye, imperfect moments ke saath.
+</p>
+<button onclick="next('p5')">Next</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+<h1>Future With You 🌍</h1>
+<p>Late night talks, stupid fights, random hugs… sab tumhare saath hi chahiye.</p>
+<button onclick="next('p6')">Final Surprise</button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="p6">
+<h1>Happy Anniversary ❤️</h1>
+<p>I love you endlessly… aur hamesha karta rahunga 😌</p>
+</div>
+
+<script>
+function next(id){
+document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="❤";
+h.className="heart";
+h.style.left=Math.random()*100+"%";
+h.style.fontSize=(15+Math.random()*35)+"px";
+h.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},250);
+</script>
+
+</body>
+</html>
