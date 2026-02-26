@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Vaishnavi ♡</title>
     <style>
-        /* --- STYLING (Red Text Requirements) --- */
-        
-        /* Font & Base Styles */
+        /* --- STYLING --- */
         :root {
-            /* Using SF Pro Display with fallbacks for non-Apple devices */
             --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --primary-color: #2c3e50;
             --heart-color: #ff4b72;
             --paper-color: #fdfaf6;
-            --poppy: #000;
         }
 
         * {
@@ -43,7 +39,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0; /* Behind everything */
+            z-index: 0;
             overflow: hidden;
         }
 
@@ -63,11 +59,9 @@
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        /* --- STRUCTURE (Blue Lines Requirements) --- */
-        
         .content-wrapper {
             position: relative;
-            z-index: 1; /* Above hearts */
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -117,7 +111,7 @@
 
         /* Spiral Notebook */
         .notebook-container {
-            display: none; /* Hidden until "Start Here" is clicked */
+            display: none;
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
@@ -132,16 +126,15 @@
 
         .notebook {
             display: flex;
-            background: #d4c4b7; /* Book cover border color */
+            background: #d4c4b7;
             padding: 10px;
             border-radius: 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        /* Paper Texture */
         .page {
             background-color: var(--paper-color);
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Subtle paper texture */
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
             flex: 1;
             padding: 30px;
             min-height: 450px;
@@ -150,43 +143,27 @@
             position: relative;
         }
 
-        .page.left {
-            border-radius: 10px 0 0 10px;
-            box-shadow: inset -5px 0 10px rgba(0,0,0,0.05);
-        }
+        .page.left { border-radius: 10px 0 0 10px; box-shadow: inset -5px 0 10px rgba(0,0,0,0.05); }
+        .page.right { border-radius: 0 10px 10px 0; box-shadow: inset 5px 0 10px rgba(0,0,0,0.05); }
 
-        .page.right {
-            border-radius: 0 10px 10px 0;
-            box-shadow: inset 5px 0 10px rgba(0,0,0,0.05);
-        }
-
-        /* Spiral Binding */
         .binding {
-            /* margin-left: 10px; */
-            /* margin-right: 10px; */
-            /* width: 40px; */
-            /* background: linear-gradient(to right, #e0e0e0, #ffffff, #e0e0e0); */
             background: transparent;
-            border-radius: 20px;
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
-            /* align-items: center; */
+            padding: 0 5px;
             border-left: 1px solid #FFE6EB;
             border-right: 1px solid #FFE6EB;
         }
 
         .ring {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: linear-gradient(to bottom, #999, #eee, #999);
-            border-radius: 5px;
-            /* box-shadow: 0 4px rgba(0,0,0,0.3); */
+            border-radius: 50%;
             border: 1px solid #413939;
         }
 
-        /* Page Content Styles */
         .page-title {
             text-align: center;
             font-size: 1.5rem;
@@ -208,10 +185,12 @@
         }
 
         .photo-box img {
-            width: 280px;
-            height: 140px;
+            width: 100%;
+            max-width: 280px;
+            height: 270px;
             object-fit: cover;
             border-radius: 4px;
+            transition: opacity 0.5s ease;
         }
 
         .shayari-box {
@@ -225,12 +204,11 @@
             line-height: 2;
             padding: 20px;
             font-style: italic;
-            /* Lined paper effect */
+            transition: opacity 0.5s ease;
             background-image: repeating-linear-gradient(transparent, transparent 31px, #a0c4ff 31px, #a0c4ff 32px);
             background-position: 0 1.2rem;
         }
 
-        /* Turn Page Button (Bottom Right) */
         .turn-page-btn {
             position: absolute;
             bottom: 20px;
@@ -253,15 +231,11 @@
             transform: translateY(-2px);
         }
 
-        /* Responsive behavior */
         @media (max-width: 768px) {
-            .notebook {
-                flex-direction: column;
-            }
+            .notebook { flex-direction: column; }
             .page { min-height: 300px; border-radius: 10px !important; }
-            .binding { width: 100%; height: 30px; flex-direction: row; }
-            .ring { width: 10px; height: 30px; background: linear-gradient(to right, #999, #eee, #999); }
-            .turn-page-btn { bottom: 10px; right: 10px; }
+            .binding { width: 100%; height: 30px; flex-direction: row; padding: 5px 0; }
+            .ring { width: 12px; height: 12px; }
         }
     </style>
 </head>
@@ -279,25 +253,15 @@
         <div class="notebook-container" id="notebook-container">
             <div class="notebook">
                 <div class="page left">
-                    <h2 class="page-title">Memories</h2>
                     <div class="photo-box">
-                        <img id="memory-photo" src="https://cache.careers360.mobi/media/article_images/2024/4/12/git-jaipur-b-tech-m-tech-admissions-2024-featured-image_.jpg" alt="Memory Photo">
+                        <img id="memory-photo" src="naitik-coder/1.jpeg" alt="Memory Photo">
                     </div>
                 </div>
 
                 <div class="binding">
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+                    <div class="ring"></div><div class="ring"></div><div class="ring"></div>
                 </div>
 
                 <div class="page right">
@@ -315,19 +279,16 @@
     <script>
         // --- 1. Falling Hearts Generator ---
         const heartsContainer = document.getElementById('hearts-container');
-        const heartCount = 35; // Adjust amount of hearts
+        const heartCount = 35;
 
         for (let i = 0; i < heartCount; i++) {
             let heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = '♡'; // Or use '❤️'
-            
-            // Randomize position, size, and animation duration
+            heart.innerHTML = '♡';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = (Math.random() * 1.5 + 0.5) + 'rem';
             heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
             heart.style.animationDelay = (Math.random() * 5) + 's';
-            
             heartsContainer.appendChild(heart);
         }
 
@@ -335,32 +296,29 @@
         function openNotebook() {
             const notebook = document.getElementById('notebook-container');
             notebook.style.display = 'block';
-            
-            // Smooth scroll down to the notebook
             notebook.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // --- 3. Page Turning Logic ---
-        // Data for the 5 pages
         const pagesData = [
             {
-                photo: "https://picsum.photos/seed/love1/400/400", // Placeholder (Change URL to actual images if you want)
+                photo: "naitik-coder/1.jpeg",
                 text: "Kuch is tarah se tum meri zindagi mein aayi...<br>Jaise andhere mein roshni muskurayi."
             },
             {
-                photo: "https://picsum.photos/seed/love2/400/400",
+                photo: "naitik-coder/2.jpeg",
                 text: "Har pal, har lamha bas tumhara hi khayal hai...<br>Mera dil tumhare bina ab behaal hai."
             },
             {
-                photo: "https://picsum.photos/seed/love3/400/400",
+                photo: "naitik-coder/3.jpeg",
                 text: "Tumhari ek muskaan pe main sab kuch haar dun...<br>Apni sari umar tumhare naam kar dun."
             },
             {
-                photo: "https://picsum.photos/seed/love4/400/400",
+                photo: "naitik-coder/4.jpeg",
                 text: "Khuda ne fursat mein tumhe banaya hoga...<br>Aur mere naseeb se tumhe milaya hoga."
             },
             {
-                photo: "https://picsum.photos/seed/love5/400/400",
+                photo: "naitik-coder/5.jpeg",
                 text: "Tum meri pehli aur aakhiri mohabbat ho.<br><br>I Love You, Vaishnavi! ❤️"
             }
         ];
@@ -368,15 +326,18 @@
         let currentPageIndex = 0;
         const photoElement = document.getElementById('memory-photo');
         const shayariElement = document.getElementById('shayari-text');
+        const btn = document.querySelector('.turn-page-btn');
 
         function turnPage() {
-            // Increment page index, loop back to start if at the end
-            currentPageIndex++;
-            if (currentPageIndex >= pagesData.length) {
-                currentPageIndex = 0; // Loops back to the first page
+            // Check if we are already at the last page
+            if (currentPageIndex === pagesData.length - 1) {
+                window.location.href = "secondpage.html";
+                return;
             }
 
-            // Simple fade effect for transition
+            currentPageIndex++;
+
+            // Transition out
             photoElement.style.opacity = 0;
             shayariElement.style.opacity = 0;
 
@@ -385,25 +346,15 @@
                 photoElement.src = pagesData[currentPageIndex].photo;
                 shayariElement.innerHTML = pagesData[currentPageIndex].text;
 
-                // Change button text on last page
-                const btn = document.querySelector('.turn-page-btn');
+                // Update button text on last page
                 if (currentPageIndex === pagesData.length - 1) {
-    btn.innerHTML = "Read<br>Again ↺";
-    
-    // Remove the old click listener (if applicable) and add the redirect
-    btn.onclick = () => {
-        window.location.href = "secondpage.html";
-    };
-                } else {
-                    btn.innerHTML = "Turn<br>Page ➡️";
+                    btn.innerHTML = "Next<br>Page ▶";
                 }
 
-                // Fade back in
-                photoElement.style.transition = "opacity 0.5s ease";
-                shayariElement.style.transition = "opacity 0.5s ease";
+                // Transition in
                 photoElement.style.opacity = 1;
                 shayariElement.style.opacity = 1;
-            }, 300); // Wait 300ms for the fade out to finish
+            }, 300);
         }
     </script>
 </body>
