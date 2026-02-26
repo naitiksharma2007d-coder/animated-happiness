@@ -142,13 +142,13 @@
         /* Yellow 'sh!!' text */
         .yellow-text {
             position: absolute;
-            top: 65%;
+            top: 60%;
             left: -1%;
             font-family: 'Arial Black', sans-serif;
             font-size: 100px;
-            color: #fffb00;
-            -webkit-text-stroke: 3px #ff007f;
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            color: #ff839a;
+            -webkit-text-stroke: 1px #c60038;
+            text-shadow: 4px 4px rgb(222, 0, 52);
             transform: rotate(-12deg);
             z-index: 100;
             pointer-events: none; /* Let clicks pass through to papers below */
@@ -159,6 +159,36 @@
             font-style: normal;
             font-size: 18px;
         }
+
+        /* Next Page Button Styling */
+        .next-page-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            padding: 10px 25px;
+            background-color: #ff839a;
+            color: white;
+            border: 2px solid #c60038;
+            border-radius: 5px;
+            font-family: 'Caveat', cursive;
+            font-size: 28px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 3px 3px 0px #c60038;
+            transition: all 0.2s ease;
+            z-index: 1000; /* Ensure it stays above everything */
+        }
+
+        .next-page-btn:hover {
+            transform: scale(1.05) rotate(-2deg);
+            background-color: #ff6b87;
+            box-shadow: 5px 5px 0px #c60038;
+        }
+
+        .next-page-btn:active {
+            transform: translateY(2px);
+            box-shadow: 1px 1px 0px #c60038;
+        }
     </style>
 </head>
 <body>
@@ -168,20 +198,20 @@
         <div class="paper" id="paper1">
             <div>... and I fallen in <br><br> Love with You <span class="emoji">😍</span></div>
             <div class="polaroid">
-                <img src=":https://www.bing.com/images/search?view=detailV2&ccid=e2pqivoK&id=14AA9B9A7852C0D43D8C63ECC74F2ED634460EF9&thid=OIP.e2pqivoKrg8PTfE3-CrSwQHaEK&mediaurl=https%3a%2f%2fwww.hdwallpapers.in%2fdownload%2fbouquet_of_light_orange_rose_flowers_4k_hd_flowers-HD.jpg&exph=2160&expw=3840&q=rose&FORM=IRPRST&ck=4CA8231F3FB689C20EB2182EBF60F808&selectedIndex=2&itb=0" alt="Sample 1">
+                <img src="naitik-coder/6.jpeg" alt="">
             </div>
         </div>
 
         <div class="paper" id="paper2">
             <div class="polaroid">
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop" alt="Sample 2">
+                <img src="naitik-coder/7.jpeg" alt="Sample 2">
             </div>
         </div>
 
         <div class="paper" id="paper3">
             <div>How can be <br><br> someone so cute <span class="emoji">❤️</span></div>
             <div class="polaroid">
-                <img src="blob:https://web.whatsapp.com/0310adc3-40bf-4d68-a18f-555c72c4f848" alt="Sample 3">
+                <img src="naitik-coder/8.jpeg" alt="Sample 3">
             </div>
         </div>
 
@@ -197,9 +227,9 @@
         </div>
 
         <div class="yellow-text">
-            sh!!
+            love!!
         </div>
-
+        <a href="thirdpage.html" class="next-page-btn">Next Page ➔</a>
     </div>
 
     <script>
